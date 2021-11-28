@@ -31,6 +31,7 @@ public class TestConfig implements CommandLineRunner{
 		
 		estado.getCidades().add(cidade);
 		
+		
 		estadoRepository.saveAll(Arrays.asList(estado));
 		cidadeRepository.saveAll(Arrays.asList(cidade));
 				
