@@ -3,6 +3,8 @@ package com.lucasladeira.agendacontatos.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +36,7 @@ public class ContatoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> save (@RequestBody NewContatoDTO newContatoDTO){
+	public ResponseEntity<Void> save (@Valid @RequestBody NewContatoDTO newContatoDTO){
 		Contato contato = contatoService.fromDTO(newContatoDTO);
 		contatoService.save(contato);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
