@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.lucasladeira.agendacontatos.domain.Cidade;
@@ -41,7 +42,7 @@ public class ContatoService {
 		Optional<Contato> opt = contatoRepository.findById(id);
 		
 		if (opt.isEmpty()){
-			System.out.println("erro");
+			System.out.println("erro, contato não encontrado");
 		}
 		
 		Contato databaseContato = opt.get();
@@ -49,6 +50,20 @@ public class ContatoService {
 		updateData(databaseContato, oldContato);
 	
 		return contatoRepository.save(databaseContato);	
+	}
+	
+	public void delete (Integer id) {
+		Optional<Contato> opt = contatoRepository.findById(id);
+		
+		if (opt.isEmpty()) {
+			System.out.println("erro, contato não encontrado");
+		}
+		
+		try {
+			contatoRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			e.getStackTrace();
+		}		
 	}
 	
 	

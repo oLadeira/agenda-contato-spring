@@ -14,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +36,7 @@ public class Contato implements Serializable{
 	private String email;
 	private String comentario;
 	
+	@Cascade(CascadeType.ALL)
 	@OneToMany(mappedBy = "contato")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
