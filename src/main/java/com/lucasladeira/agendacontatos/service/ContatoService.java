@@ -69,6 +69,7 @@ public class ContatoService {
 	
 	
 	//----------------auxiliares----------------------
+	
 	private void updateData(Contato databaseContato, Contato contato) {
 		databaseContato.setNome(contato.getNome());
 		databaseContato.setEmail(contato.getEmail());
