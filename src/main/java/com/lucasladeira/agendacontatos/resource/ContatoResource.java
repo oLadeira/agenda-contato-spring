@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucasladeira.agendacontatos.domain.Contato;
+import com.lucasladeira.agendacontatos.dto.ContatoDTO;
 import com.lucasladeira.agendacontatos.service.ContatoService;
 
 @RestController
@@ -23,4 +27,19 @@ public class ContatoResource {
 		List<Contato> list = contatoService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> update(@PathVariable Integer id,@RequestBody ContatoDTO contatoDTO){
+		Contato contato = contatoService.fromDTO(contatoDTO);
+		contato = contatoService.update(id, contato);
+		return ResponseEntity.ok().build();
+	}
+	
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){
+//		Cliente cliente = clienteService.fromDTO(clienteDTO);
+//		cliente = clienteService.update(id, cliente);
+//		return ResponseEntity.ok().build();
+//	}
+	
 }

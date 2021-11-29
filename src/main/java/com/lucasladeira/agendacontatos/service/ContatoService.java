@@ -1,15 +1,13 @@
 package com.lucasladeira.agendacontatos.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lucasladeira.agendacontatos.domain.Contato;
+import com.lucasladeira.agendacontatos.dto.ContatoDTO;
 import com.lucasladeira.agendacontatos.repository.ContatoRepository;
 
 @Service
@@ -30,10 +28,10 @@ public class ContatoService {
 	}
 	
 	public Contato update (Integer id, Contato oldContato) {
-		Optional<Contato> opt = contatoRepository.findById(oldContato.getId());
+		Optional<Contato> opt = contatoRepository.findById(id);
 		
 		if (opt.isEmpty()){
-			//erro
+			System.out.println("erro");
 		}
 		
 		Contato databaseContato = opt.get();
@@ -43,12 +41,16 @@ public class ContatoService {
 		return contatoRepository.save(databaseContato);	
 	}
 	
-	//auxiliares
+	
+	//----------------auxiliares----------------------
 	private void updateData(Contato databaseContato, Contato contato) {
 		databaseContato.setNome(contato.getNome());
 		databaseContato.setEmail(contato.getEmail());
 		databaseContato.setComentario(contato.getComentario());
 	}
 	
+	public Contato fromDTO (ContatoDTO contatoDTO) {
+		return new Contato(contatoDTO.getId(), contatoDTO.getNome(), contatoDTO.getEmail(), contatoDTO.getComentario());
+	}
 	
 }

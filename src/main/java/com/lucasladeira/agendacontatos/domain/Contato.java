@@ -1,5 +1,6 @@
 package com.lucasladeira.agendacontatos.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +22,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-public class Contato {
+public class Contato implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
