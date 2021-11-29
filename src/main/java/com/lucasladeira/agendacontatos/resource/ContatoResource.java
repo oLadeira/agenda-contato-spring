@@ -35,11 +35,4 @@ public class ContatoResource {
 		return ResponseEntity.ok().build();
 	}
 	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){
-//		Cliente cliente = clienteService.fromDTO(clienteDTO);
-//		cliente = clienteService.update(id, cliente);
-//		return ResponseEntity.ok().build();
-//	}
-	
 }
