@@ -16,6 +16,7 @@ import com.lucasladeira.agendacontatos.dto.ContatoDTO;
 import com.lucasladeira.agendacontatos.dto.NewContatoDTO;
 import com.lucasladeira.agendacontatos.repository.ContatoRepository;
 import com.lucasladeira.agendacontatos.repository.EnderecoRepository;
+import com.lucasladeira.agendacontatos.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class ContatoService {
@@ -42,7 +43,7 @@ public class ContatoService {
 		Optional<Contato> opt = contatoRepository.findById(id);
 		
 		if (opt.isEmpty()){
-			System.out.println("erro, contato não encontrado");
+			throw new ObjectNotFoundException("Contato não encontrado!");
 		}
 		
 		Contato databaseContato = opt.get();
@@ -56,13 +57,13 @@ public class ContatoService {
 		Optional<Contato> opt = contatoRepository.findById(id);
 		
 		if (opt.isEmpty()) {
-			System.out.println("erro, contato não encontrado");
+			throw new ObjectNotFoundException("Contato não encontrado!");
 		}
 		
 		try {
 			contatoRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			e.getStackTrace();
+			throw new DataIntegrityViolationException("Não foi possível deletar o contato, há objetos relacionados");
 		}		
 	}
 	
