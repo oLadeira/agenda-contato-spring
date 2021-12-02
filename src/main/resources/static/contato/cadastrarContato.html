@@ -1,28 +1,31 @@
 <!doctype html>
 <html lang="pt-bt">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Agenda De Contatos - Cadastrar</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" href= "/agenda-contatos-web/src/main/resources/static/css/style.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="/agenda-contatos-web/src/main/resources/static/css/style.css">
 
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Agenda de Contatos</h1>
 
     <div class="container">
 
-        <form method="POST" action="">
-        
+        <form action="" id="formCadastroContato">
+
             <div class="col-md-6">
                 <label class="form-label">Nome</label>
                 <input type="text" class="form-control" placeholder="..." id="nome" required>
             </div>
-            
+
             <div class="col-md-6">
                 <label class="form-label">E-mail</label>
                 <input type="email" class="form-control" placeholder="..." id="email">
@@ -58,7 +61,7 @@
 
             <div class="col-md-8">
                 <label class="form-label">Cidade</label>
-                <select class="form-control form-control-lg">
+                <select class="form-control form-control-lg" id="cidade">
                     <option value="1">São Paulo</option>
                     <option value="2">Rio de Janeiro</option>
                 </select>
@@ -66,20 +69,52 @@
 
             <div class="col-md-10">
                 <label class="form-label">Comentários</label>
-                <textarea id="comentarios" class="form-control" rows="6"></textarea>
+                <textarea class="form-control" rows="6" id="comentarios"></textarea>
             </div>
-                                   
 
-            <div class="col-md-10">
-                <button type="submit" class="btn btn-success">Cadastrar</button>
-            </div>
+            
         </form>
+        <div class="col-md-10">
+            <button type="button" class="btn btn-success" onclick="salvarContato()">Cadastrar</button>
+        </div>
+
     </div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  </body>
+
+    <script type="text/javascript">
+        function salvarContato() {
+            $.ajax({              
+                method: "POST",
+                url: "../../contatos",
+                data: JSON.stringify({
+                    id: null,
+                    nome: $("#nome").val(),
+                    email: $("#email").val(),
+                    comentario: $("#comentarios").val(),
+                    rua: $("#rua").val(),
+                    numero: $("#numero").val(),
+                    bairro: $("#bairro").val(),
+                    cep: $("#cep").val(),
+                    telefone: $("#telefone").val(),
+                    cidadeId: $("#cidade").val()
+                }),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    alert("Contato salvo!")
+                }
+            }).fail(function (xhr, status, errorThrow) {
+                alert("Erro ao cadastrar o contato! Erro:" + errorThrow)
+            });
+        }
+    </script>
+
+</body>
+
 </html>
