@@ -27,6 +27,7 @@ public class ContatoService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+
 	public List<Contato> findAll(){
 		List<Contato> list = contatoRepository.findAll();
 		return list;

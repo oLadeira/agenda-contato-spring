@@ -52,5 +52,5 @@ public class Contato implements Serializable{
 		this.nome = nome;
 		this.email = email;
 		this.comentario = comentario;
-	}	
+	}
 }

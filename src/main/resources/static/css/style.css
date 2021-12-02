@@ -1,0 +1,11 @@
+body{
+    background-color: #363848;
+}
+h1, label{
+    color: white;
+}
+
+label{
+    margin-top: 2.3rem;
+}
+
