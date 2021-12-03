@@ -61,10 +61,12 @@
                 success: function (contatos) {
                     //$('#tabelaContatos > tbody > tr').removee();
                     
+                    $('#tabelaContatos > tbody > tr').remove();
+
                     $.each(contatos, function(i, contato){
-                        $contatos.append('<tr><td>' + contato.nome + '</td>' 
+                        $contatos.append('<tbody><tr><td>' + contato.nome + '</td>' 
                         + '<td>' + contato.email + '</td>' 
-                        + '<td>' + contato.comentario + '</td>' + '</tr>');
+                        + '<td>' + contato.comentario + '</td>' + '</tr></tbody>');
                     });
 
                 }
