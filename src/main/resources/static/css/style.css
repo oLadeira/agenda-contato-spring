@@ -2,10 +2,18 @@ body{
     background-color: #363848;
 }
 h1, label{
-    color: white;
+    color: black;
 }
 
 label{
     margin-top: 2.3rem;
 }
 
+
+table{
+    background-color: white;
+}
+
+.modal-footer{
+    display: block;
+}

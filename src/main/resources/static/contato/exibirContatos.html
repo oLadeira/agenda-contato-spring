@@ -10,13 +10,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-        <link rel="stylesheet" href="/agenda-contatos-web/src/main/resources/static/css/style.css">
+    <link rel="stylesheet" href="/agenda-contatos-web/src/main/resources/static/css/style.css">
 </head>
 
 <body>
     <h1>Agenda de Contatos</h1>
 
-    <div class="container">       
+    <div class="container">
 
         <table class="table" id="tabelaContatos">
             <thead>
@@ -24,59 +24,166 @@
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Comentários</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
 
             <tbody>
 
+                <td>Teste</td>
+                <td>Teste</td>
+                <td>Teste</td>
+                <td><a href="" data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</a></td>
+                <td><a href="" class="btn btn-danger">Excluir</a></td>
             </tbody>
 
-            
+
         </table>
-        <button class="btn btn-success" onclick="buscarContatos()">Buscar Contatos</button>     
+        <button class="btn btn-success" onclick="buscarContatos()">Buscar Contatos</button>
 
 
-    </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Editar Contato</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="contatoEditar">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nome</label>
+                                    <input type="text" class="form-control" placeholder="..." id="nome" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="..." id="email">
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label">Rua</label>
+                                    <input type="text" class="form-control" placeholder="..." id="rua">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">Número</label>
+                                    <input type="number" class="form-control" placeholder="..." id="numero">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label">Bairro</label>
+                                    <input type="text" class="form-control" placeholder="..." id="bairro">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">CEP</label>
+                                    <input type="text" class="form-control" placeholder="..." id="cep">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" placeholder="..." id="telefone">
+
+                                    <label class="form-label">Telefone 2 (Opcional)</label>
+                                    <input type="text" class="form-control" placeholder="Opcional" id="telefone2">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <label class="form-label">Cidade</label>
+                                    <select class="form-control form-control-lg" id="cidade">
+                                        <option value="1">São Paulo</option>
+                                        <option value="2">Rio de Janeiro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label class="form-label">Comentários</label>
+                                    <textarea class="form-control" rows="6" id="comentarios"></textarea>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
 
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"
-        crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"
+            crossorigin="anonymous"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        function buscarContatos() {
+            function buscarContatos() {
 
-            var $contatos = $('#tabelaContatos');
+                var $contatos = $('#tabelaContatos');
 
-            $.ajax({
-                type: 'GET',
-                url: "../../contatos",
-                success: function (contatos) {
-                    //$('#tabelaContatos > tbody > tr').removee();
-                    
-                    $('#tabelaContatos > tbody > tr').remove();
+                $.ajax({
+                    type: 'GET',
+                    url: "../../contatos",
+                    success: function (contatos) {
+                        //$('#tabelaContatos > tbody > tr').removee();
 
-                    $.each(contatos, function(i, contato){
-                        $contatos.append('<tbody><tr><td>' + contato.nome + '</td>' 
-                        + '<td>' + contato.email + '</td>' 
-                        + '<td>' + contato.comentario + '</td>' + '</tr></tbody>');
-                    });
+                        $('#tabelaContatos > tbody > tr').remove();
 
-                }
-            }).fail(function (xhr, status, errorThrow) {
-                alert("erroooooo");
-            });
-        }
+                        $.each(contatos, function (i, contato) {
+                            $contatos.append('<tbody><tr><td>' + contato.nome + '</td>'
+                                + '<td>' + contato.email + '</td>'
+                                + '<td>' + contato.comentario + '</td>'
+                                + '<td><button data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</button></td>'
+                                + '<td><button class="btn btn-danger">Excluir</button></td>'
+                                + '</tr></tbody>');
+                        });
 
+                    }
+                }).fail(function (xhr, status, errorThrow) {
+                    alert("erroooooo");
+                });
+            }
 
-    </script>
+            function preencherForm() {
+
+                var $contatoEditar = $('#contatoEditar');
+
+            }
+
+        </script>
 
 </body>
 
