@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Agenda De Contatos - API REST</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" href="/agenda-contatos-web/src/main/resources/static/css/style.css">
+</head>
+
+<body>
+    <h1>Agenda de Contatos</h1>
+
+    <div class="container">       
+
+        <table class="table" id="tabelaContatos">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Comentários</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+            
+        </table>
+        <button class="btn btn-success" onclick="buscarContatos()">Buscar Contatos</button>     
+
+
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"
+        crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+        function buscarContatos() {
+
+            var $contatos = $('#tabelaContatos');
+
+            $.ajax({
+                type: 'GET',
+                url: "../../contatos",
+                success: function (contatos) {
+                    //$('#tabelaContatos > tbody > tr').removee();
+                    
+                    $.each(contatos, function(i, contato){
+                        $contatos.append('<tr><td>' + contato.nome + '</td>' 
+                        + '<td>' + contato.email + '</td>' 
+                        + '<td>' + contato.comentario + '</td>' + '</tr>');
+                    });
+
+                }
+            }).fail(function (xhr, status, errorThrow) {
+                alert("erroooooo");
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>

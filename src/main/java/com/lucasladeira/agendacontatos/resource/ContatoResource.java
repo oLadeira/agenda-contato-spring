@@ -2,6 +2,7 @@ package com.lucasladeira.agendacontatos.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -30,13 +31,19 @@ public class ContatoResource {
 	private ContatoService contatoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Contato>> findAll(){
-		List<Contato> list = contatoService.findAll();
+	public ResponseEntity<List<ContatoDTO>> findAllDTO(){
+		List<ContatoDTO> list = contatoService.findAllDTO();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<Optional<Contato>> findById(@PathVariable Integer id){
+		Optional<Contato> opt = contatoService.findById(id);
+		return ResponseEntity.ok().body(opt);
+	}
+	
 	@PostMapping
-	public ResponseEntity<Void> save (@Valid @RequestBody NewContatoDTO newContatoDTO){
+	public ResponseEntity<Void> save(@Valid @RequestBody NewContatoDTO newContatoDTO){
 		Contato contato = contatoService.fromDTO(newContatoDTO);
 		contatoService.save(contato);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -52,7 +59,7 @@ public class ContatoResource {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete (@PathVariable Integer id){
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		contatoService.delete(id);
 		return ResponseEntity.ok().build();
 	}

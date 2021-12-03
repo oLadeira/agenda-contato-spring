@@ -107,7 +107,7 @@
                 }),
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    alert("Contato salvo!")
+                    alert("Contato salvo!" + response)
                 }
             }).fail(function (xhr, status, errorThrow) {
                 alert("Erro ao cadastrar o contato! Erro:" + errorThrow)

@@ -1,5 +1,6 @@
 package com.lucasladeira.agendacontatos.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +29,25 @@ public class ContatoService {
 	private EnderecoRepository enderecoRepository;
 	
 
-	public List<Contato> findAll(){
+	public List<ContatoDTO> findAllDTO(){
 		List<Contato> list = contatoRepository.findAll();
-		return list;
+		List<ContatoDTO> listDTO = new ArrayList<>();
+		
+		for (int i=0; i<list.size(); i++) {
+			ContatoDTO contatoDTO = new ContatoDTO(list.get(i));
+			listDTO.add(contatoDTO);
+		}
+		
+		return listDTO;
+	}
+	
+	public Optional<Contato> findById(Integer id){
+		Optional<Contato> opt = contatoRepository.findById(id);
+		
+		if (opt.isEmpty()) {
+			throw new ObjectNotFoundException("Contato não encontrado!");
+		}		
+		return opt;
 	}
 	
 	@Transactional
