@@ -133,8 +133,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
 
@@ -166,7 +164,7 @@
                             $contatos.append('<tbody><tr><td>' + contato.nome + '</td>'
                                 + '<td>' + contato.email + '</td>'
                                 + '<td>' + contato.comentario + '</td>'
-                                + '<td><button data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</button></td>'
+                                + '<td><button onclick="preencherForm('+ contato.id +')" data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</button></td>'
                                 + '<td><button class="btn btn-danger">Excluir</button></td>'
                                 + '</tr></tbody>');
                         });
@@ -177,9 +175,48 @@
                 });
             }
 
-            function preencherForm() {
+            function preencherForm(id) {
 
                 var $contatoEditar = $('#contatoEditar');
+
+                $.ajax({
+                    type: "GET",
+                    url: "../../contatos/pesquisarId",
+                    data: "id=" + id,
+                    success: function (contatos) {                     
+                       
+                        $("#nome").val(contatos.nome);
+                        $("#email").val(contatos.email);
+                        
+                        $.each(contatos.enderecos, function(i, value){
+                            $("#rua").val(value.rua);
+                        });
+
+                        $.each(contatos.enderecos, function(i, value){
+                            $("#numero").val(value.numero);
+                        });
+
+                        $.each(contatos.enderecos, function(i, value){
+                            $("#bairro").val(value.bairro);
+                        });
+
+                        $.each(contatos.enderecos, function(i, value){
+                            $("#cep").val(value.cep);
+                        });                        
+
+                        
+                        $("#telefone").val(contatos.telefones);
+
+                        if (contatos.telefone2 != ""){
+                            $("#telefone2").val(contatos.telefone2);
+                        }
+
+                        $("#comentarios").val(contatos.comentario);
+                        
+                    }
+                }).fail(function (xhr, status, errorThrow) {
+                    alert("erroooooo");
+                });
 
             }
 

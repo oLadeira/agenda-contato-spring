@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -36,8 +37,9 @@ public class ContatoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Contato>> findById(@PathVariable Integer id){
+	
+	@GetMapping("/pesquisarId")
+	public ResponseEntity<Optional<Contato>> findById(@RequestParam(name = "id") Integer id){
 		Optional<Contato> opt = contatoService.findById(id);
 		return ResponseEntity.ok().body(opt);
 	}
