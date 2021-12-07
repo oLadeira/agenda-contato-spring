@@ -231,7 +231,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button onclick="   " type="button" class="btn btn-primary">Deletar Contato</button>
+                            <button onclick="excluirContato(getIdExclusao())" type="button" class="btn btn-primary">Deletar Contato</button>
                         </div>
                     </div>
                 </div>
@@ -254,6 +254,12 @@
             function getId() {
                 var id;
                 id = $("#id").val();
+                return id;
+            }
+
+            function getIdExclusao() {
+                var id;
+                id = $("#idExcluir").val();
                 return id;
             }
 
@@ -302,9 +308,26 @@
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
                         alert("Contato Atualizado!" + response)
+                        $('#modalEditar').modal('hide');
+                        buscarContatos();
                     }
                 }).fail(function (xhr, status, errorThrow) {
                     alert("Erro ao atualizar o contato! Erro:" + errorThrow)
+                });
+            }
+
+            function excluirContato(id) {
+                $.ajax({
+                    method: "DELETE",
+                    url: "../../contatos/deletar/?id=" + id,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        alert("Contato Deletado!" + response)
+                        $('#modalExcluir').modal('hide');
+                        buscarContatos();
+                    }
+                }).fail(function (xhr, status, errorThrow) {
+                    alert("Erro ao deletar o contato! Erro:" + errorThrow)
                 });
             }
 
