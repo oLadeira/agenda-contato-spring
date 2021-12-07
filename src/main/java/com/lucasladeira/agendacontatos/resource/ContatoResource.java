@@ -22,7 +22,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.lucasladeira.agendacontatos.domain.Contato;
 import com.lucasladeira.agendacontatos.dto.ContatoDTO;
 import com.lucasladeira.agendacontatos.dto.NewContatoDTO;
+import com.lucasladeira.agendacontatos.dto.updateContatoDTO;
 import com.lucasladeira.agendacontatos.service.ContatoService;
+import com.lucasladeira.agendacontatos.service.EnderecoService;
 
 @RestController
 @RequestMapping("/contatos")
@@ -30,6 +32,8 @@ public class ContatoResource {
 
 	@Autowired
 	private ContatoService contatoService;
+	
+
 	
 	@GetMapping
 	public ResponseEntity<List<ContatoDTO>> findAllDTO(){
@@ -53,15 +57,14 @@ public class ContatoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable Integer id,@RequestBody ContatoDTO contatoDTO){
-		Contato contato = contatoService.fromDTO(contatoDTO);
-		contato = contatoService.update(id, contato);
-		return ResponseEntity.ok().build();
-	}
+//	@PutMapping("/editar")
+//	public ResponseEntity<Void> update(@RequestParam(name = "id") Integer id, @RequestBody updateContatoDTO updateContatoDTO){
+//		Contato contato = contatoService.from
+//		return ResponseEntity.ok().build();
+//	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
+	@DeleteMapping("/deletar")
+	public ResponseEntity<Void> delete(@RequestParam(name = "id") Integer id){
 		contatoService.delete(id);
 		return ResponseEntity.ok().build();
 	}

@@ -27,7 +27,7 @@ public class ContatoService {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+		
 
 	public List<ContatoDTO> findAllDTO(){
 		List<Contato> list = contatoRepository.findAll();
@@ -57,18 +57,17 @@ public class ContatoService {
 		enderecoRepository.saveAll(contato.getEnderecos());
 	}
 	
-	public Contato update (Integer id, Contato oldContato) {
+	public Contato update (Integer id, Contato contato) {
 		Optional<Contato> opt = contatoRepository.findById(id);
 		
 		if (opt.isEmpty()){
 			throw new ObjectNotFoundException("Contato não encontrado!");
 		}
+		Contato databaseContato = opt.get();		
+		//updateData(databaseContato, oldContatoDTO);
+		contato.setId(id);
 		
-		Contato databaseContato = opt.get();
-		
-		updateData(databaseContato, oldContato);
-	
-		return contatoRepository.save(databaseContato);	
+		return contatoRepository.save(contato);	
 	}
 	
 	public void delete (Integer id) {
@@ -92,6 +91,7 @@ public class ContatoService {
 		databaseContato.setNome(contato.getNome());
 		databaseContato.setEmail(contato.getEmail());
 		databaseContato.setComentario(contato.getComentario());
+		
 	}
 	
 	public Contato fromDTO (ContatoDTO contatoDTO) {

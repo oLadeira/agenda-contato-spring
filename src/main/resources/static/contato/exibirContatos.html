@@ -31,11 +31,6 @@
 
             <tbody>
 
-                <td>Teste</td>
-                <td>Teste</td>
-                <td>Teste</td>
-                <td><a href="" data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</a></td>
-                <td><a href="" class="btn btn-danger">Excluir</a></td>
             </tbody>
 
 
@@ -63,6 +58,15 @@
 
                     <div class="modal-body">
                         <form id="contatoEditar">
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">ID</label>
+                                    <input class="form-control" type="text" disabled id="id">
+                                </div>
+
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label">Nome</label>
@@ -128,7 +132,106 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button onclick="editarContato(getId())" type="button" class="btn btn-primary">Save
+                                changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Excluir Contato</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="contatoExcluir">
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="form-label">ID</label>
+                                    <input class="form-control" type="text" disabled id="idExcluir">
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nome</label>
+                                    <input type="text" class="form-control" placeholder="..." disabled id="nomeExcluir"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" placeholder="..." disabled id="emailExcluir">
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label">Rua</label>
+                                    <input type="text" class="form-control" placeholder="..." disabled id="ruaExcluir">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">Número</label>
+                                    <input type="number" class="form-control" placeholder="..." disabled id="numeroExcluir">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label">Bairro</label>
+                                    <input type="text" class="form-control" placeholder="..." disabled id="bairroExcluir">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">CEP</label>
+                                    <input type="text" class="form-control" placeholder="..." disabled id="cepExcluir">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" placeholder="..." disabled id="telefoneExcluir">
+
+                                    <label class="form-label">Telefone 2 (Opcional)</label>
+                                    <input type="text" class="form-control" placeholder="Opcional" disabled
+                                        id="telefone2Excluir">
+                                </div>
+
+                                <div class="col-md-8">
+                                    <label class="form-label">Cidade</label>
+                                    <select class="form-control form-control-lg" disabled id="cidadeExcluir">
+                                        <option value="1">São Paulo</option>
+                                        <option value="2">Rio de Janeiro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label class="form-label">Comentários</label>
+                                    <textarea class="form-control" rows="6" disabled id="comentariosExcluir"></textarea>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button onclick="   " type="button" class="btn btn-primary">Deletar Contato</button>
                         </div>
                     </div>
                 </div>
@@ -148,6 +251,12 @@
 
         <script type="text/javascript">
 
+            function getId() {
+                var id;
+                id = $("#id").val();
+                return id;
+            }
+
             function buscarContatos() {
 
                 var $contatos = $('#tabelaContatos');
@@ -164,55 +273,126 @@
                             $contatos.append('<tbody><tr><td>' + contato.nome + '</td>'
                                 + '<td>' + contato.email + '</td>'
                                 + '<td>' + contato.comentario + '</td>'
-                                + '<td><button onclick="preencherForm('+ contato.id +')" data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</button></td>'
-                                + '<td><button class="btn btn-danger">Excluir</button></td>'
+                                + '<td><button onclick="preencherForm(' + contato.id + ')" data-toggle="modal" data-target="#modalEditar" class="btn btn-success">Editar</button></td>'
+                                + '<td><button onclick="preencherFormExcluir(' + contato.id + ')" data-toggle="modal" data-target="#modalExcluir" class="btn btn-danger">Excluir</button></td>'
                                 + '</tr></tbody>');
                         });
-
                     }
                 }).fail(function (xhr, status, errorThrow) {
                     alert("erroooooo");
                 });
             }
 
+            function editarContato(id) {
+                $.ajax({
+                    method: "PUT",
+                    url: "../../contatos/editar?id=" + id,
+                    data: JSON.stringify({
+                        id: id,
+                        nome: $("#nome").val(),
+                        email: $("#email").val(),
+                        comentario: $("#comentarios").val(),
+                        rua: $("#rua").val(),
+                        numero: $("#numero").val(),
+                        bairro: $("#bairro").val(),
+                        cep: $("#cep").val(),
+                        telefone: $("#telefone").val(),
+                        cidadeId: $("#cidade").val()
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        alert("Contato Atualizado!" + response)
+                    }
+                }).fail(function (xhr, status, errorThrow) {
+                    alert("Erro ao atualizar o contato! Erro:" + errorThrow)
+                });
+            }
+
             function preencherForm(id) {
 
-                var $contatoEditar = $('#contatoEditar');
+                //var $contatoEditar = $('#contatoEditar');
 
                 $.ajax({
                     type: "GET",
                     url: "../../contatos/pesquisarId",
                     data: "id=" + id,
-                    success: function (contatos) {                     
-                       
+                    success: function (contatos) {
+
+                        $("#id").val(contatos.id);
                         $("#nome").val(contatos.nome);
                         $("#email").val(contatos.email);
-                        
-                        $.each(contatos.enderecos, function(i, value){
+
+                        $.each(contatos.enderecos, function (i, value) {
                             $("#rua").val(value.rua);
                         });
 
-                        $.each(contatos.enderecos, function(i, value){
+                        $.each(contatos.enderecos, function (i, value) {
                             $("#numero").val(value.numero);
                         });
 
-                        $.each(contatos.enderecos, function(i, value){
+                        $.each(contatos.enderecos, function (i, value) {
                             $("#bairro").val(value.bairro);
                         });
 
-                        $.each(contatos.enderecos, function(i, value){
+                        $.each(contatos.enderecos, function (i, value) {
                             $("#cep").val(value.cep);
-                        });                        
+                        });
 
-                        
+
                         $("#telefone").val(contatos.telefones);
 
-                        if (contatos.telefone2 != ""){
+                        if (contatos.telefone2 != "") {
                             $("#telefone2").val(contatos.telefone2);
                         }
 
                         $("#comentarios").val(contatos.comentario);
-                        
+
+                    }
+                }).fail(function (xhr, status, errorThrow) {
+                    alert("erroooooo");
+                });
+
+            }
+
+            function preencherFormExcluir(id) {
+
+                //var $contatoEditar = $('#contatoEditar');
+
+                $.ajax({
+                    type: "GET",
+                    url: "../../contatos/pesquisarId",
+                    data: "id=" + id,
+                    success: function (contatos) {
+
+                        $("#idExcluir").val(contatos.id);
+                        $("#nomeExcluir").val(contatos.nome);
+                        $("#emailExcluir").val(contatos.email);
+
+                        $.each(contatos.enderecos, function (i, value) {
+                            $("#ruaExcluir").val(value.rua);
+                        });
+
+                        $.each(contatos.enderecos, function (i, value) {
+                            $("#numeroExcluir").val(value.numero);
+                        });
+
+                        $.each(contatos.enderecos, function (i, value) {
+                            $("#bairroExcluir").val(value.bairro);
+                        });
+
+                        $.each(contatos.enderecos, function (i, value) {
+                            $("#cepExcluir").val(value.cep);
+                        });
+
+
+                        $("#telefoneExcluir").val(contatos.telefones);
+
+                        if (contatos.telefone2 != "") {
+                            $("#telefone2Excluir").val(contatos.telefone2);
+                        }
+
+                        $("#comentariosExcluir").val(contatos.comentario);
+
                     }
                 }).fail(function (xhr, status, errorThrow) {
                     alert("erroooooo");
